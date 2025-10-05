@@ -3,152 +3,238 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KAREL BUSINESS - Car Services in Kolwezi</title>
+  <title>Karel Auto - Car Business</title>
   <style>
-    body { margin: 0; font-family: Arial, sans-serif; }
-    header, footer { background: #222; color: #fff; padding: 1em; text-align: center; }
-    nav { display: flex; justify-content: space-between; align-items: center; padding: 1em; background: #444; color: #fff; }
-    nav select { padding: 0.5em; }
-    .container { padding: 1em; }
-    .section { margin-bottom: 2em; }
-    .cars { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1em; }
-    .car-card { border: 1px solid #ccc; padding: 1em; border-radius: 8px; }
-    .car-card img { width: 100%; height: auto; border-radius: 4px; }
-    form input, form textarea, form select { width: 100%; padding: 0.5em; margin: 0.5em 0; }
-    form button { padding: 0.7em 1.5em; background: #007BFF; color: white; border: none; border-radius: 4px; }
-    footer a { color: #fff; margin: 0 0.5em; text-decoration: none; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      color: #333;
+    }
+
+    header {
+      background: #111;
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+    }
+
+    nav {
+      background: #222;
+      display: flex;
+      justify-content: center;
+      padding: 10px;
+    }
+
+    nav a {
+      color: #fff;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #ffcc00;
+    }
+
+    /* Hero Slider */
+    .slider {
+      position: relative;
+      overflow: hidden;
+      height: 400px;
+    }
+
+    .slides {
+      display: flex;
+      width: 300%;
+      height: 100%;
+      transition: transform 0.6s ease-in-out;
+    }
+
+    .slides img {
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .navigation-manual {
+      position: absolute;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      bottom: 15px;
+    }
+
+    .manual-btn {
+      border: 2px solid #fff;
+      padding: 5px;
+      border-radius: 50%;
+      cursor: pointer;
+      margin: 0 5px;
+      transition: background 0.3s;
+    }
+
+    .manual-btn:hover {
+      background: #fff;
+    }
+
+    section {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .services, .cars {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    footer {
+      background: #111;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .contact a {
+      display: inline-block;
+      margin-top: 15px;
+      background: #25D366;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
   <header>
-    <h1>KAREL BUSINESS</h1>
-    <p id="tagline">Your trusted car partner in Kolwezi</p>
+    <h1>Karel Auto</h1>
+    <p>Your trusted partner in cars – sales, rentals & repairs</p>
   </header>
 
   <nav>
-    <div><strong id="nav-title">Menu</strong></div>
-    <select id="language-switcher">
-      <option value="en">English</option>
-      <option value="fr">Français</option>
-      <option value="zh">中文</option>
-    </select>
+    <a href="#services">Services</a>
+    <a href="#cars">Cars</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
   </nav>
 
-  <div class="container">
-    <section class="section" id="services">
-      <h2 data-i18n="services">Services</h2>
-      <ul>
-        <li data-i18n="sales">Car Sales (New & Used)</li>
-        <li data-i18n="rentals">Car Rentals</li>
-        <li data-i18n="maintenance">Maintenance & Repairs</li>
-        <li data-i18n="import">Import Assistance</li>
-      </ul>
-    </section>
-
-    <section class="section" id="cars">
-      <h2 data-i18n="availableCars">Available Cars</h2>
-      <div class="cars">
-        <div class="car-card">
-          <img src="https://via.placeholder.com/300x200" alt="Toyota Hilux" />
-          <h3>Toyota Hilux</h3>
-          <p data-i18n="price">Price: $25,000</p>
-        </div>
-        <div class="car-card">
-          <img src="https://via.placeholder.com/300x200" alt="Hyundai Tucson" />
-          <h3>Hyundai Tucson</h3>
-          <p data-i18n="price">Price: $22,000</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="booking">
-      <h2 data-i18n="bookTestDrive">Book a Test Drive</h2>
-      <form>
-        <input type="text" placeholder="Your Name" />
-        <input type="email" placeholder="Email" />
-        <select>
-          <option>Toyota Hilux</option>
-          <option>Hyundai Tucson</option>
-        </select>
-        <input type="date" />
-        <textarea placeholder="Additional Notes"></textarea>
-        <button type="submit">Submit</button>
-      </form>
-    </section>
-
-    <section class="section" id="contact">
-      <h2 data-i18n="contactUs">Contact Us</h2>
-      <p data-i18n="location">📍 Kolwezi, Lualaba Province, DRC</p>
-      <p>📞 +243 999 123 456</p>
-      <p>✉️ info@karelbusiness.cd</p>
-    </section>
+  <!-- Hero Slider -->
+  <div class="slider">
+    <div class="slides" id="slides">
+      <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70" alt="Car 1">
+      <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a" alt="Car 2">
+      <img src="https://images.unsplash.com/photo-1493238792000-8113da705763" alt="Car 3">
+    </div>
+    <div class="navigation-manual">
+      <div class="manual-btn" onclick="goToSlide(0)"></div>
+      <div class="manual-btn" onclick="goToSlide(1)"></div>
+      <div class="manual-btn" onclick="goToSlide(2)"></div>
+    </div>
   </div>
 
-  <footer>
-    <p>&copy; 2025 KAREL BUSINESS</p>
-    <div>
-      <a href="#">Facebook</a>
-      <a href="#">WhatsApp</a>
-      <a href="#">Instagram</a>
+  <!-- Services -->
+  <section id="services">
+    <h2>Our Services</h2>
+    <div class="services">
+      <div class="card">
+        <h3>Car Sales</h3>
+        <p>Buy brand new and used cars at competitive prices.</p>
+      </div>
+      <div class="card">
+        <h3>Rentals</h3>
+        <p>Affordable car rental solutions for your trips.</p>
+      </div>
+      <div class="card">
+        <h3>Repairs</h3>
+        <p>Professional repair and maintenance services.</p>
+      </div>
+      <div class="card">
+        <h3>Import & Export</h3>
+        <p>We handle international car shipping and sourcing.</p>
+      </div>
     </div>
+  </section>
+
+  <!-- Car Listings -->
+  <section id="cars">
+    <h2>Available Cars</h2>
+    <div class="cars">
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1511914265871-c4e1f4d9732d" alt="Car A">
+        <h3>Toyota Corolla</h3>
+        <p>Price: $15,000</p>
+      </div>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7" alt="Car B">
+        <h3>BMW X5</h3>
+        <p>Price: $45,000</p>
+      </div>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1493238792000-8113da705763" alt="Car C">
+        <h3>Mercedes-Benz C-Class</h3>
+        <p>Price: $38,000</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <h2>About Us</h2>
+    <p>Karel Auto has been serving customers with reliable vehicles and services for over a decade. Our mission is to make car ownership simple, affordable, and trustworthy.</p>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p>Got a question or need a car? Reach us today!</p>
+    <form>
+      <input type="text" placeholder="Your Name" required><br><br>
+      <input type="email" placeholder="Your Email" required><br><br>
+      <textarea placeholder="Your Message" required></textarea><br><br>
+      <button type="submit">Send</button>
+    </form>
+    <a href="https://wa.me/243000000000" target="_blank">Chat on WhatsApp</a>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Karel Auto. All rights reserved.</p>
   </footer>
 
   <script>
-    const translations = {
-      en: {
-        tagline: "Your trusted car partner in Kolwezi",
-        navTitle: "Menu",
-        services: "Services",
-        sales: "Car Sales (New & Used)",
-        rentals: "Car Rentals",
-        maintenance: "Maintenance & Repairs",
-        import: "Import Assistance",
-        availableCars: "Available Cars",
-        price: "Price",
-        bookTestDrive: "Book a Test Drive",
-        contactUs: "Contact Us",
-        location: "📍 Kolwezi, Lualaba Province, DRC"
-      },
-      fr: {
-        tagline: "Votre partenaire automobile de confiance à Kolwezi",
-        navTitle: "Menu",
-        services: "Services",
-        sales: "Vente de voitures (neuves et d'occasion)",
-        rentals: "Location de voitures",
-        maintenance: "Entretien et réparations",
-        import: "Assistance à l'importation",
-        availableCars: "Voitures disponibles",
-        price: "Prix",
-        bookTestDrive: "Réserver un essai",
-        contactUs: "Contactez-nous",
-        location: "📍 Kolwezi, Province du Lualaba, RDC"
-      },
-      zh: {
-        tagline: "您在Kolwezi值得信赖的汽车伙伴",
-        navTitle: "菜单",
-        services: "服务",
-        sales: "汽车销售（新车和二手车）",
-        rentals: "汽车租赁",
-        maintenance: "维护与修理",
-        import: "进口协助",
-        availableCars: "可用车辆",
-        price: "价格",
-        bookTestDrive: "预约试驾",
-        contactUs: "联系我们",
-        location: "📍 Kolwezi，卢阿拉巴省，刚果（金）"
-      }
-    };
+    let index = 0;
+    const slides = document.getElementById('slides');
+    const totalSlides = slides.children.length;
 
-    const switcher = document.getElementById("language-switcher");
-    switcher.addEventListener("change", () => {
-      const lang = switcher.value;
-      document.getElementById("tagline").textContent = translations[lang].tagline;
-      document.getElementById("nav-title").textContent = translations[lang].navTitle;
-      document.querySelectorAll("[data-i18n]").forEach(el => {
-        const key = el.getAttribute("data-i18n");
-        el.textContent = translations[lang][key];
-      });
-    });
+    function showSlide(i) {
+      index = i;
+      slides.style.transform = `translateX(${-index * 100}%)`;
+    }
+
+    function nextSlide() {
+      index = (index + 1) % totalSlides;
+      showSlide(index);
+    }
+
+    function goToSlide(i) {
+      showSlide(i);
+    }
+
+    setInterval(nextSlide, 4000); // auto change every 4s
   </script>
 </body>
 </html>
