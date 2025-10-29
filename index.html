@@ -1,240 +1,791 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Karel Auto - Car Business</title>
+  <!-- Méta -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Millennium Buinesse RDC — Services de nettoyage, voies, bâtiments, gaz domestique. Créé par AmaliCorp." />
+
+  <!-- Titre de la page -->
+  <title>Millennium Buinesse RDC — Service de nettoyage</title>
+
+  <!-- Google Fonts : 'Bangers' pour un style graffiti, 'Poppins' pour le texte -->
+  <!-- Si vous préférez ne pas charger depuis Google, remplacez par vos polices locales -->
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Icônes (optionnel) -->
+  <link rel="shortcut icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64'><rect width='100%25' height='100%25' fill='%23000'/><text x='50%25' y='55%25' font-size='32' fill='%23fff' font-family='Bangers' text-anchor='middle'>M</text></svg>">
+
+  <!-- Styles principaux -->
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f9f9f9;
-      color: #333;
+    /* ==========================
+       CONFIG - variables faciles à modifier
+       ========================== */
+    :root{
+      /* Palette graffiti — changez ces valeurs pour adapter l'ambiance */
+      --bg:#0e0f11;               /* arrière-plan sombre */
+      --primary:#ff3b6b;          /* rose vif */
+      --accent:#00e0a3;           /* vert néon */
+      --spray:#ffd166;            /* jaune */
+      --muted:rgba(255,255,255,0.75);
+      --glass: rgba(255,255,255,0.06);
+
+      /* typographie */
+      --font-display: "Bangers", cursive;
+      --font-base: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+
+      /* layout */
+      --max-width: 1200px;
+      --radius: 12px;
+      --transition: 300ms cubic-bezier(.2,.9,.3,1);
     }
 
-    header {
-      background: #111;
+    /* ==========================
+       Reset basique
+       ========================== */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--font-base);
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(0,0,0,0.15), transparent),
+                  radial-gradient(800px 400px at 90% 90%, rgba(255,59,107,0.06), transparent),
+                  var(--bg);
       color: #fff;
-      padding: 15px;
-      text-align: center;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      padding-bottom:60px; /* espace pour footer */
     }
 
-    nav {
-      background: #222;
-      display: flex;
-      justify-content: center;
-      padding: 10px;
+    /* Conteneur central */
+    .container{
+      max-width:var(--max-width);
+      margin:0 auto;
+      padding:28px;
+      position:relative;
     }
 
-    nav a {
-      color: #fff;
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: bold;
+    /* ==========================
+       HEADER
+       ========================== */
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      position:relative;
+      z-index:10;
     }
 
-    nav a:hover {
-      color: #ffcc00;
+    /* Logo stylisé - modifiable */
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      text-decoration:none;
+      color:var(--muted);
+    }
+    .logo .mark{
+      /* logo rond avec lettre M en police 'Bangers' */
+      width:64px;
+      height:64px;
+      background:linear-gradient(135deg,var(--primary),var(--accent));
+      border-radius:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.6), 0 0 20px rgba(255,59,107,0.06) inset;
+      transform:rotate(-6deg);
+    }
+    .logo .mark span{
+      font-family:var(--font-display);
+      font-size:34px;
+      color:white;
+      letter-spacing:1px;
+      text-shadow: 0 2px 0 rgba(0,0,0,0.35);
+    }
+    .logo .text{
+      font-size:14px;
+      line-height:1;
+      text-transform:uppercase;
+    }
+    .logo .text .brand{font-weight:700;color:var(--spray)}
+    .logo .text .tag{font-weight:400;color:var(--muted);font-size:12px;opacity:0.95}
+
+    /* Navigation simple */
+    nav ul{
+      list-style:none;
+      display:flex;
+      gap:14px;
+      margin:0;
+      padding:0;
+      align-items:center;
+    }
+    nav a{
+      color:var(--muted);
+      text-decoration:none;
+      padding:8px 12px;
+      border-radius:8px;
+      transition:all var(--transition);
+      font-weight:600;
+      font-size:14px;
+    }
+    nav a:hover{
+      transform:translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+      color:white;
+      background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
     }
 
-    /* Hero Slider */
-    .slider {
-      position: relative;
-      overflow: hidden;
-      height: 400px;
+    /* ==========================
+       HERO
+       ========================== */
+    .hero{
+      margin-top:28px;
+      padding:40px;
+      border-radius:18px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      backdrop-filter: blur(4px);
+      position:relative;
+      overflow:hidden;
+      display:flex;
+      gap:24px;
+      align-items:center;
     }
 
-    .slides {
-      display: flex;
-      width: 300%;
-      height: 100%;
-      transition: transform 0.6s ease-in-out;
+    /* Graffiti background shapes (SVG sprites) */
+    .hero .splash{
+      position:absolute;
+      right:-10%;
+      top:-10%;
+      opacity:0.12;
+      width:420px;
+      transform:rotate(-10deg);
+      filter:blur(6px);
+      pointer-events:none;
     }
 
-    .slides img {
-      width: 100%;
-      object-fit: cover;
+    .hero .left{
+      flex:1;
+      min-width:260px;
+    }
+    .hero h1{
+      margin:0 0 10px 0;
+      font-family:var(--font-display);
+      font-size:48px;
+      color:var(--spray);
+      letter-spacing:1px;
+      text-shadow: 0 8px 30px rgba(0,0,0,0.7);
+    }
+    .hero p.lead{
+      margin:0 0 16px 0;
+      color:var(--muted);
+      font-size:16px;
+      max-width:680px;
     }
 
-    .navigation-manual {
-      position: absolute;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      bottom: 15px;
+    /* CTA buttons */
+    .cta{
+      display:flex;
+      gap:12px;
+      margin-top:12px;
+      flex-wrap:wrap;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:12px 18px;
+      border-radius:999px;
+      border:0;
+      cursor:pointer;
+      transition:all var(--transition);
+      font-weight:700;
+      text-transform:none;
+      letter-spacing:0.2px;
+    }
+    .btn-primary{
+      background: linear-gradient(90deg,var(--primary),var(--accent));
+      color:white;
+      box-shadow: 0 10px 30px rgba(255,59,107,0.12);
+    }
+    .btn-ghost{
+      background:transparent;
+      color:var(--muted);
+      border:1px dashed rgba(255,255,255,0.06);
+    }
+    .btn:hover{transform:translateY(-4px)}
+
+    /* Right column hero - carte rapide / services en miniature */
+    .hero .right{
+      width:360px;
+      min-width:240px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      padding:18px;
+      border-radius:12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+    }
+    .card-service{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      padding:8px;
+      border-radius:10px;
+      background:linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+      margin-bottom:8px;
+    }
+    .card-service .ico{
+      width:44px;
+      height:44px;
+      background:var(--glass);
+      display:grid;
+      place-items:center;
+      border-radius:10px;
+      color:var(--spray);
+      font-weight:800;
+      font-family:var(--font-display);
+    }
+    .card-service strong{display:block}
+    .card-service span{font-size:13px;color:var(--muted)}
+
+    /* ==========================
+       SECTIONS: Services, À propos, Contact
+       ========================== */
+    section{
+      margin-top:28px;
+      padding:28px;
+      border-radius:14px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.014), rgba(0,0,0,0.02));
+      box-shadow: 0 6px 30px rgba(0,0,0,0.6);
     }
 
-    .manual-btn {
-      border: 2px solid #fff;
-      padding: 5px;
-      border-radius: 50%;
-      cursor: pointer;
-      margin: 0 5px;
-      transition: background 0.3s;
+    /* Grille pour les services */
+    .services-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+      gap:16px;
+    }
+    .service{
+      padding:16px;
+      border-radius:12px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.008));
+      transition:transform var(--transition), box-shadow var(--transition);
+      cursor:default;
+    }
+    .service:hover{
+      transform:translateY(-8px) rotate(-1deg);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.7);
+    }
+    .service .title{
+      font-family:var(--font-display);
+      font-size:20px;
+      color:var(--primary);
+    }
+    .service p{color:var(--muted);margin:8px 0 0 0}
+
+    /* About two columns */
+    .about{
+      display:grid;
+      grid-template-columns:1fr 320px;
+      gap:18px;
+      align-items:start;
+    }
+    .about .about-card{
+      padding:16px;border-radius:12px;background:linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
     }
 
-    .manual-btn:hover {
-      background: #fff;
+    /* Contact form */
+    .contact-grid{
+      display:grid;
+      grid-template-columns:1fr 360px;
+      gap:18px;
+      align-items:start;
     }
-
-    section {
-      padding: 40px 20px;
-      text-align: center;
+    form{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
     }
-
-    .services, .cars {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
+    input,textarea,select{
+      padding:12px;
+      border-radius:8px;
+      border:1px solid rgba(255,255,255,0.06);
+      background:rgba(255,255,255,0.02);
+      color:white;
+      outline:none;
+      transition:box-shadow var(--transition), transform var(--transition);
+      font-family:var(--font-base);
     }
-
-    .card {
-      background: #fff;
-      border-radius: 8px;
-      padding: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    input:focus,textarea:focus,select:focus{
+      box-shadow: 0 8px 30px rgba(0,0,0,0.6), 0 0 18px rgba(0,233,163,0.06);
+      transform:translateY(-3px);
+      border-color:rgba(0,233,163,0.18);
     }
+    textarea{min-height:140px;resize:vertical}
 
-    .card img {
-      width: 100%;
-      height: 150px;
-      object-fit: cover;
-      border-radius: 6px;
+    /* Liste de contacts / infos */
+    .info-card{
+      padding:16px;
+      border-radius:12px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
     }
+    .contact-line{display:flex;gap:12px;align-items:center;margin-bottom:10px}
+    .contact-line svg{width:22px;height:22px;opacity:0.9}
+    .small{font-size:13px;color:var(--muted)}
 
-    footer {
-      background: #111;
-      color: #fff;
-      text-align: center;
-      padding: 20px;
+    /* ==========================
+       FOOTER
+       ========================== */
+    footer{
+      position:fixed;
+      left:0;right:0;bottom:0;
+      padding:12px 20px;
+      background:linear-gradient(180deg, rgba(0,0,0,0.5), rgba(0,0,0,0.85));
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      color:rgba(255,255,255,0.8);
+      font-size:13px;
+      z-index:100;
+      backdrop-filter: blur(6px);
     }
+    footer a{color:var(--spray);text-decoration:none;font-weight:600}
 
-    .contact a {
-      display: inline-block;
-      margin-top: 15px;
-      background: #25D366;
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 5px;
-      text-decoration: none;
+    /* ==========================
+       RESPONSIVE
+       ========================== */
+    @media (max-width:900px){
+      .about{grid-template-columns:1fr}
+      .contact-grid{grid-template-columns:1fr}
+      .hero{flex-direction:column;align-items:flex-start}
+      .hero .right{width:100%}
+      header{flex-direction:column;align-items:flex-start;gap:16px}
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Karel Auto</h1>
-    <p>Your trusted partner in cars – sales, rentals & repairs</p>
-  </header>
+  <!-- ==========================
+       HEADER: logo + nav
+       Commentaires: modifiez les liens, ajoutez / retirez des ancre
+       ========================== -->
+  <div class="container">
+    <header>
+      <!-- Logo : modifiez le texte "M" ou remplacez par une image -->
+      <a href="#home" class="logo" aria-label="Millennium Buinesse RDC - Accueil">
+        <div class="mark" aria-hidden="true"><span>M</span></div>
+        <div class="text">
+          <div class="brand">Millennium Buinesse</div>
+          <div class="tag">RDC — par AmaliCorp</div>
+        </div>
+      </a>
 
-  <nav>
-    <a href="#services">Services</a>
-    <a href="#cars">Cars</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-  </nav>
+      <!-- Navigation : changez les ancres si vous modifiez les sections -->
+      <nav aria-label="Navigation principale">
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#about">À propos</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#devis" class="btn btn-ghost">Demander un devis</a></li>
+        </ul>
+      </nav>
+    </header>
 
-  <!-- Hero Slider -->
-  <div class="slider">
-    <div class="slides" id="slides">
-      <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70" alt="Car 1">
-      <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a" alt="Car 2">
-      <img src="https://images.unsplash.com/photo-1493238792000-8113da705763" alt="Car 3">
-    </div>
-    <div class="navigation-manual">
-      <div class="manual-btn" onclick="goToSlide(0)"></div>
-      <div class="manual-btn" onclick="goToSlide(1)"></div>
-      <div class="manual-btn" onclick="goToSlide(2)"></div>
-    </div>
+    <!-- ==========================
+         HERO : accroche principale
+         Modifiez le texte, la description et les boutons CTA
+         ========================== -->
+    <main id="home" class="hero" role="main" aria-labelledby="hero-title">
+      <!-- Effet graffiti / splash (SVG inline pour facilité d'édition) -->
+      <svg class="splash" viewBox="0 0 600 400" aria-hidden="true">
+        <!-- Exemple de forme "spray" ; remplacez / éditez les path selon goût -->
+        <defs>
+          <linearGradient id="g1" x1="0" x2="1">
+            <stop offset="0" stop-color="#ff3b6b" />
+            <stop offset="1" stop-color="#00e0a3" />
+          </linearGradient>
+        </defs>
+        <g fill="url(#g1)" opacity="0.9">
+          <path d="M520 30c-40 10-60 58-98 70s-120-2-160 26-52 88-96 116-120 18-130 60 88 68 150 60 96-36 152-34 120 26 168 8 156-84 106-154S560 18 520 30z"/>
+        </g>
+      </svg>
+
+      <div class="left">
+        <!-- Titre principal -->
+        <h1 id="hero-title">Nettoyage professionnel & gaz domestique — <span style="color:var(--primary)">RDC</span></h1>
+
+        <!-- Petit texte explicatif -->
+        <p class="lead">
+          Millennium Buinesse RDC offre des services de nettoyage haut de gamme : bâtiments & bureaux, voies publiques,
+          nettoyage intensif pour commerces, et fourniture de gaz pour usages domestiques. Nous combinons efficacité,
+          sécurité et respect des normes locales.
+        </p>
+
+        <!-- Boutons d'action -->
+        <div class="cta">
+          <button class="btn btn-primary" onclick="scrollToSection('contact')">
+            <!-- Icône simple en SVG inline -->
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M2 12h20" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12 2v20" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Demander un devis
+          </button>
+
+          <a class="btn btn-ghost" href="#services">Voir nos services</a>
+        </div>
+      </div>
+
+      <aside class="right" aria-label="Aperçu des services">
+        <!-- Liste condensée de services pour attirer l'oeil -->
+        <div class="card-service" title="Bâtiments et bureaux">
+          <div class="ico">B</div>
+          <div>
+            <strong>Bâtiments & Bureaux</strong>
+            <span>Nettoyage régulier, vitreries, sols industriels</span>
+          </div>
+        </div>
+
+        <div class="card-service" title="Voirie">
+          <div class="ico" style="color:var(--accent)">V</div>
+          <div>
+            <strong>Voirie & Routes</strong>
+            <span>Dégagements, lavage haute-pression</span>
+          </div>
+        </div>
+
+        <div class="card-service" title="Commerces">
+          <div class="ico" style="color:var(--spray)">C</div>
+          <div>
+            <strong>Commerces</strong>
+            <span>Nettoyages intensifs, gestion déchets</span>
+          </div>
+        </div>
+
+        <div class="card-service" title="Gaz domestique">
+          <div class="ico" style="color:var(--primary)">G</div>
+          <div>
+            <strong>Fourniture de Gaz</strong>
+            <span>Livraison sécurisée pour usage domestique</span>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <!-- ==========================
+         SECTION: Services détaillés
+         Remplacez ou dupliquez les items selon vos offres
+         ========================== -->
+    <section id="services" aria-labelledby="services-title" class="services">
+      <div class="container" style="padding:0;">
+        <h2 id="services-title" style="font-family:var(--font-display);color:var(--accent);margin:0 0 12px 0;">Nos services</h2>
+        <p class="small" style="margin:0 0 16px 0;color:var(--muted);">Des solutions sur mesure pour entreprises, collectivités et particuliers.</p>
+
+        <div class="services-grid" role="list">
+          <!-- Service 1 - Bâtiments -->
+          <article class="service" role="listitem" aria-label="Nettoyage de bâtiments et bureaux">
+            <div class="title">Nettoyage de Bâtiments & Bureaux</div>
+            <p>Entretien quotidien, lavage de vitres, désinfection, traitement des sols, gestion des poubelles et tri.</p>
+          </article>
+
+          <!-- Service 2 - Voirie -->
+          <article class="service" role="listitem" aria-label="Nettoyage de voirie">
+            <div class="title">Nettoyage de Voirie et Routes</div>
+            <p>Lavage haute-pression, dégagement des caniveaux, enlèvement de déchets, interventions après événements.</p>
+          </article>
+
+          <!-- Service 3 - Commerces -->
+          <article class="service" role="listitem" aria-label="Nettoyage pour commerces">
+            <div class="title">Nettoyage pour Commerces & Retails</div>
+            <p>Nettoyage intensif hors-heures, vitrines, zones de stockage, contrôle hygiène et sécurité.</p>
+          </article>
+
+          <!-- Service 4 - Gaz -->
+          <article class="service" role="listitem" aria-label="Fourniture de gaz domestique">
+            <div class="title">Fourniture de Gaz domestique</div>
+            <p>Livraison de bouteilles et recharges, installation simple et conseils sécurité pour les foyers.</p>
+          </article>
+
+          <!-- Service 5 - Interventions spéciales -->
+          <article class="service" role="listitem" aria-label="Interventions spéciales">
+            <div class="title">Nettoyages lourds & Interventions d'urgence</div>
+            <p>Grand nettoyage après chantier ou sinistre, désinfection post-événement et interventions rapides.</p>
+          </article>
+
+          <!-- Service 6 - Contrats -->
+          <article class="service" role="listitem" aria-label="Contrats et maintenance">
+            <div class="title">Contrat de maintenance</div>
+            <p>Forfaits mensuels, planification, audits et rapports réguliers pour garantir la qualité.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================
+         SECTION: À propos
+         ========================== -->
+    <section id="about" aria-labelledby="about-title">
+      <div class="container" style="padding:0;">
+        <h2 id="about-title" style="font-family:var(--font-display);color:var(--primary);margin:0 0 12px 0;">À propos de nous</h2>
+        <div class="about">
+          <!-- Colonne principale : description -->
+          <div class="about-card">
+            <p style="margin-top:0;color:var(--muted)">
+              Fondée par <strong>AmaliCorp</strong>, Millennium Buinesse RDC est une start-up congolaise spécialisée dans
+              les solutions complètes de propreté et la fourniture de gaz domestique en toute sécurité. Nous plaçons la
+              satisfaction client, la sécurité et la durabilité au cœur de nos opérations.
+            </p>
+
+            <ul style="margin:12px 0 0 18px;color:var(--muted)">
+              <li>Équipe formée aux normes de sécurité</li>
+              <li>Matériel professionnel et produits adaptés</li>
+              <li>Interventions rapides et planifiées</li>
+            </ul>
+
+            <p class="small" style="margin-top:12px;color:var(--muted)">
+              N’hésitez pas à nous contacter pour un audit gratuit et une proposition sur mesure.
+            </p>
+          </div>
+
+          <!-- Colonne latérale : valeurs rapides -->
+          <aside class="about-card" aria-label="Nos valeurs">
+            <h3 style="margin:0 0 8px 0;color:var(--accent);font-family:var(--font-display)">Nos valeurs</h3>
+            <p class="small">Sécurité · Fiabilité · Respect de l'environnement · Rapidité</p>
+
+            <div style="margin-top:12px">
+              <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
+                <div style="width:10px;height:10px;border-radius:50%;background:var(--primary)"></div>
+                <div class="small">Interventions 24/7 pour urgences</div>
+              </div>
+              <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
+                <div style="width:10px;height:10px;border-radius:50%;background:var(--accent)"></div>
+                <div class="small">Personnel formé et équipé</div>
+              </div>
+              <div style="display:flex;gap:8px;align-items:center;">
+                <div style="width:10px;height:10px;border-radius:50%;background:var(--spray)"></div>
+                <div class="small">Solutions adaptées au marché congolais</div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================
+         SECTION: Contact / Devis
+         Le formulaire est local (javascript) — changez l'action pour l'envoyer à un serveur
+         ========================== -->
+    <section id="contact" aria-labelledby="contact-title">
+      <div class="container" style="padding:0;">
+        <h2 id="contact-title" style="font-family:var(--font-display);color:var(--spray);margin:0 0 12px 0;">Contact & Devis</h2>
+        <p class="small" style="margin:0 0 16px 0;color:var(--muted)">Remplissez le formulaire ci-dessous — nous vous répondrons rapidement.</p>
+
+        <div class="contact-grid">
+          <!-- Formulaire : NOTE -> changez `submitForm` pour envoyer via fetch vers votre API -->
+          <form id="contact-form" onsubmit="submitForm(event)" novalidate>
+            <!-- Champ Nom -->
+            <label class="small" for="name">Nom complet</label>
+            <input id="name" name="name" type="text" placeholder="Ex: Jean Mukuna" required aria-required="true"/>
+
+            <!-- Champ Téléphone -->
+            <label class="small" for="phone">Téléphone</label>
+            <input id="phone" name="phone" type="tel" placeholder="+243 812 345 678" required />
+
+            <!-- Champ Email -->
+            <label class="small" for="email">Adresse e-mail</label>
+            <input id="email" name="email" type="email" placeholder="contact@exemple.com" required />
+
+            <!-- Type de service (select) -->
+            <label class="small" for="service">Type de prestation</label>
+            <select id="service" name="service" required>
+              <option value="">-- Choisissez --</option>
+              <option>Bâtiments & Bureaux</option>
+              <option>Voirie & Routes</option>
+              <option>Commerces / Retail</option>
+              <option>Fourniture de Gaz</option>
+              <option>Intervention d'urgence</option>
+            </select>
+
+            <!-- Message -->
+            <label class="small" for="message">Détails / Message</label>
+            <textarea id="message" name="message" placeholder="Décrivez votre besoin, lieu, date souhaitée..." required></textarea>
+
+            <!-- Boutons -->
+            <div style="display:flex;gap:12px;align-items:center;">
+              <button type="submit" class="btn btn-primary">Envoyer la demande</button>
+              <button type="button" class="btn btn-ghost" onclick="document.getElementById('contact-form').reset()">Réinitialiser</button>
+            </div>
+
+            <!-- Zone pour retour utilisateur -->
+            <div id="form-feedback" class="small" aria-live="polite" style="margin-top:8px;color:var(--muted)"></div>
+          </form>
+
+          <!-- Carte d'information et contacts -->
+          <aside class="info-card" aria-label="Informations de contact">
+            <h3 style="margin:0 0 8px 0;color:var(--primary);font-family:var(--font-display)">Infos</h3>
+            <!-- Remplacez les données ci-dessous par vos coordonnées réelles -->
+            <div class="contact-line">
+              <!-- Icône téléphone (inline svg) -->
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 16.92v3a1 1 0 0 1-1.11 1 19 19 0 0 1-8.63-3.07 19 19 0 0 1-6-6A19 19 0 0 1 2.09 3.11 1 1 0 0 1 3.1 2h3a1 1 0 0 1 1 .75c.12.68.35 1.35.69 1.97a1 1 0 0 1-.24 1.09L6.6 7.6a16 16 0 0 0 6 6l1.8-1.95a1 1 0 0 1 1.09-.24c.62.34 1.29.57 1.97.69A1 1 0 0 1 22 16.92z" stroke="white" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div>
+                <div style="font-weight:700">+243 812 345 678</div>
+                <div class="small">Contact commercial / Devis</div>
+              </div>
+            </div>
+
+            <div class="contact-line">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 1 1 18 0z" stroke="white" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div>
+                <div style="font-weight:700">Kinshasa, République Dém. du Congo</div>
+                <div class="small">Zones d'intervention : provinces selon demande</div>
+              </div>
+            </div>
+
+            <div class="contact-line">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 4h16v16H4z" stroke="white" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div>
+                <div style="font-weight:700">contact@millenniumbusiness.rdc</div>
+                <div class="small">E-mail général</div>
+              </div>
+            </div>
+
+            <hr style="border:none;border-top:1px dashed rgba(255,255,255,0.04);margin:12px 0">
+
+            <p class="small" style="margin:0">Besoin d'un contrat régulier ? <a href="#devis">Cliquez ici pour un devis personnalisé.</a></p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================
+         SECTION: Devis rapide (ancre)
+         Vous pouvez ajouter un système pour générer PDF ou envoyez à votre backend
+         ========================== -->
+    <section id="devis" aria-labelledby="devis-title">
+      <div class="container" style="padding:0;">
+        <h2 id="devis-title" style="font-family:var(--font-display);color:var(--accent);margin:0 0 12px 0;">Demande de devis rapide</h2>
+        <p class="small" style="margin:0 0 16px 0;color:var(--muted)">Remplissez la demande et nous vous enverrons une estimation.</p>
+
+        <!-- Exemple simple: boutons pour différents devis -->
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <button class="btn btn-primary" onclick="prefillDevis('Bâtiments & Bureaux')">Devis Bâtiment</button>
+          <button class="btn btn-primary" onclick="prefillDevis('Voirie & Routes')">Devis Voirie</button>
+          <button class="btn btn-primary" onclick="prefillDevis('Fourniture de Gaz')">Devis Gaz</button>
+        </div>
+      </div>
+    </section>
   </div>
 
-  <!-- Services -->
-  <section id="services">
-    <h2>Our Services</h2>
-    <div class="services">
-      <div class="card">
-        <h3>Car Sales</h3>
-        <p>Buy brand new and used cars at competitive prices.</p>
-      </div>
-      <div class="card">
-        <h3>Rentals</h3>
-        <p>Affordable car rental solutions for your trips.</p>
-      </div>
-      <div class="card">
-        <h3>Repairs</h3>
-        <p>Professional repair and maintenance services.</p>
-      </div>
-      <div class="card">
-        <h3>Import & Export</h3>
-        <p>We handle international car shipping and sourcing.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Car Listings -->
-  <section id="cars">
-    <h2>Available Cars</h2>
-    <div class="cars">
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1511914265871-c4e1f4d9732d" alt="Car A">
-        <h3>Toyota Corolla</h3>
-        <p>Price: $15,000</p>
-      </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7" alt="Car B">
-        <h3>BMW X5</h3>
-        <p>Price: $45,000</p>
-      </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1493238792000-8113da705763" alt="Car C">
-        <h3>Mercedes-Benz C-Class</h3>
-        <p>Price: $38,000</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- About -->
-  <section id="about">
-    <h2>About Us</h2>
-    <p>Karel Auto has been serving customers with reliable vehicles and services for over a decade. Our mission is to make car ownership simple, affordable, and trustworthy.</p>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact">
-    <h2>Contact Us</h2>
-    <p>Got a question or need a car? Reach us today!</p>
-    <form>
-      <input type="text" placeholder="Your Name" required><br><br>
-      <input type="email" placeholder="Your Email" required><br><br>
-      <textarea placeholder="Your Message" required></textarea><br><br>
-      <button type="submit">Send</button>
-    </form>
-    <a href="https://wa.me/243000000000" target="_blank">Chat on WhatsApp</a>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 Karel Auto. All rights reserved.</p>
+  <!-- ==========================
+       FOOTER
+       ========================== -->
+  <footer role="contentinfo">
+    <!-- Changez l'URL vers vos mentions légales / politique de confidentialité -->
+    <div>© <strong>Millennium Buinesse RDC</strong> — Créé par <a href="#" aria-label="AmaliCorp">AmaliCorp</a>. Tous droits réservés.</div>
   </footer>
 
+  <!-- ==========================
+       JAVASCRIPT : interactions simples et commentaires
+       - scrollToSection(id) : scrolls smooth vers une section
+       - submitForm(event) : exemple de validation locale et d'envoi (à adapter)
+       - prefillDevis(type) : remplit le champ service dans le formulaire
+       ========================== -->
   <script>
-    let index = 0;
-    const slides = document.getElementById('slides');
-    const totalSlides = slides.children.length;
-
-    function showSlide(i) {
-      index = i;
-      slides.style.transform = `translateX(${-index * 100}%)`;
+    /* Utilitaire : scroll fluide vers une section */
+    function scrollToSection(id){
+      const el = document.getElementById(id);
+      if(!el) return;
+      el.scrollIntoView({behavior:'smooth', block:'start'});
     }
 
-    function nextSlide() {
-      index = (index + 1) % totalSlides;
-      showSlide(index);
+    /* Pré-remplir le champ service pour un devis rapide.
+       - Utilisé par les boutons "Devis rapide".
+       - Si le formulaire n'est pas visible, on scrolle d'abord vers contact.
+    */
+    function prefillDevis(type){
+      const service = document.getElementById('service');
+      if(service){
+        service.value = type;
+        scrollToSection('contact');
+        // Mettre le focus dans le message pour inciter l'utilisateur
+        setTimeout(()=>{ document.getElementById('message').focus(); }, 600);
+      } else {
+        scrollToSection('contact');
+      }
     }
 
-    function goToSlide(i) {
-      showSlide(i);
+    /* Validation simple + simulation d'envoi.
+       - Remplacez la partie "fetch" par votre API endpoint (ex: /api/contact).
+       - Important: n'envoyez pas de données sensibles en clair ; utilisez HTTPS côté serveur.
+       - Ce code ne stocke rien côté serveur car c'est un exemple local.
+    */
+    async function submitForm(event){
+      event.preventDefault();
+      const feedback = document.getElementById('form-feedback');
+      feedback.style.color = 'var(--muted)';
+      feedback.textContent = 'Envoi en cours...';
+
+      // Récupération des champs
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const service = document.getElementById('service').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      // Vérifications basiques
+      if(!name || !phone || !email || !service || !message){
+        feedback.style.color = '#ff9aa2';
+        feedback.textContent = 'Veuillez remplir tous les champs obligatoires.';
+        return;
+      }
+
+      // Exemple d'objet à envoyer
+      const payload = { name, phone, email, service, message, source: 'site-web' };
+
+      try{
+        // REMARQUE: ci-dessous, nous simulons l'envoi.
+        // Pour un envoi réel, décommentez et remplacez l'URL :
+        //
+        // const res = await fetch('https://votre-backend.example/api/contact', {
+        //   method:'POST',
+        //   headers:{'Content-Type':'application/json'},
+        //   body: JSON.stringify(payload)
+        // });
+        // const data = await res.json();
+        //
+        // Simuler une attente réseau (supprimez en prod)
+        await new Promise(r => setTimeout(r, 900));
+
+        // Simuler un succès
+        feedback.style.color = 'lightgreen';
+        feedback.textContent = 'Merci ! Votre demande a été reçue. Nous vous contacterons bientôt.';
+        document.getElementById('contact-form').reset();
+      } catch(err){
+        feedback.style.color = '#ff9aa2';
+        feedback.textContent = 'Erreur lors de l\'envoi. Veuillez réessayer plus tard.';
+        console.error('Erreur envoi formulaire:', err);
+      }
     }
 
-    setInterval(nextSlide, 4000); // auto change every 4s
+    /* Optionnel : petits effets visuels lors du scroll (déco)
+       - Vous pouvez remplacer par AOS / ScrollReveal pour plus d'effets.
+       - Ici, on ajoute une classe 'visible' quand un élément entre dans la fenêtre.
+    */
+    (function(){
+      const obs = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting) entry.target.style.transform = 'none';
+        });
+      }, {threshold:0.12});
+
+      // Appliquer un léger offset initial à sections pour animation
+      document.querySelectorAll('section, .service, .card-service').forEach(el=>{
+        el.style.transition = 'transform 600ms cubic-bezier(.2,.9,.3,1), opacity 600ms';
+        el.style.transform = 'translateY(18px)';
+        el.style.opacity = '1';
+        obs.observe(el);
+      });
+    })();
   </script>
 </body>
 </html>
